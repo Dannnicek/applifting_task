@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface MonitoredEndpointRepository extends JpaRepository<MonitoredEndpoint, Long> {
     List<MonitoredEndpoint> findByOwner(User authenticatedUser);
+    MonitoredEndpoint findByName(String name);
 }

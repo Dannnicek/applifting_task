@@ -1,8 +1,11 @@
 package com.example.endpoint_task.controller;
 
+import com.example.endpoint_task.entity.MonitoredEndpoint;
 import com.example.endpoint_task.entity.MonitoringResult;
+import com.example.endpoint_task.service.MonitoredEndpointService;
 import com.example.endpoint_task.service.MonitoringResultService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +15,8 @@ import java.util.List;
 public class MonitoringResultController {
 
     private final MonitoringResultService monitoringResultService;
+    @Autowired
+    private MonitoredEndpointService monitoredEndpointService;
 
     public MonitoringResultController(MonitoringResultService monitoringResultService) {
         this.monitoringResultService = monitoringResultService;
@@ -23,10 +28,12 @@ public class MonitoringResultController {
         return monitoringResultService.getAllMonitoringResults(accessToken);
     }
 
-    @GetMapping("/{endpointId}")
-    public List<MonitoringResult> getResultsForEndpoint(@PathVariable("endpointId") Long endpointId,
+    @GetMapping("/{endpointName}")
+    public List<MonitoringResult> getResultsForEndpoint(@PathVariable("endpointName") String endpointName,
                                                         HttpServletRequest request) {
         String accessToken = request.getHeader("Authorization");
+        MonitoredEndpoint monitoredEndpoint = monitoredEndpointService.getMonitoredEndpointByName(endpointName);
+        Long endpointId = monitoredEndpoint.getId();
         return monitoringResultService.getResultsForEndpoint(endpointId, accessToken);
     }
 

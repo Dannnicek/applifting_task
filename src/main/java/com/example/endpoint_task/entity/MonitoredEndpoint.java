@@ -17,6 +17,7 @@ public class MonitoredEndpoint {
     private Long id;
     @NotBlank(message = "Name is required")
     @Size(max = 255, message = "Name must be less than 255 characters")
+    @Column(unique = true)
     private String name;
     @NotBlank(message = "URL is required")
     @URL(message = "Invalid URL format")

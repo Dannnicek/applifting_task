@@ -37,8 +37,10 @@ public class MonitoredEndpointController {
         monitoringService.updateMonitoredEndpoint(monitoredEndpoint);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteMonitoredEndpoint(@PathVariable Long id) {
+    @DeleteMapping("/{name}")
+    public void deleteMonitoredEndpoint(@PathVariable String name) {
+        MonitoredEndpoint deletedEndpoint = monitoredEndpointService.getMonitoredEndpointByName(name);
+        Long id = deletedEndpoint.getId();
         monitoredEndpointService.deleteMonitoredEndpoint(id);
         monitoringService.deleteMonitoredEndpoint(id);
     }

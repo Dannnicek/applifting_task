@@ -1,4 +1,5 @@
 package com.example.endpoint_task.service.impl;
+
 import com.example.endpoint_task.entity.MonitoredEndpoint;
 import com.example.endpoint_task.entity.MonitoringResult;
 import com.example.endpoint_task.entity.User;
@@ -99,8 +100,6 @@ public class MonitoringResultServiceImplTest {
         assertEquals(now, savedResult.getDateOfCheck());
         assertEquals(200, savedResult.getReturnedHttpStatusCode());
         assertEquals("OK", savedResult.getReturnedPayload());
-        assertNull(savedResult.getMonitoredEndpoint()); // The endpoint should be null
+        assertNull(savedResult.getMonitoredEndpoint());
     }
-
-    // Add more test cases for other methods as needed
 }

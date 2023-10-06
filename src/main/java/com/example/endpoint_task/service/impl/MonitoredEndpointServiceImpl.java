@@ -41,6 +41,11 @@ public class MonitoredEndpointServiceImpl implements MonitoredEndpointService {
     }
 
     @Override
+    public MonitoredEndpoint getMonitoredEndpointByName(String name) {
+        return monitoredEndpointRepository.findByName(name);
+    }
+
+    @Override
     public void createMonitoredEndpoint(MonitoredEndpoint monitoredEndpoint) {
         monitoredEndpointRepository.save(monitoredEndpoint);
     }
